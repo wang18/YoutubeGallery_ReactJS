@@ -5,9 +5,21 @@ var AppActions = {
     saveVideo: function(video){
         AppDispatcher.handleViewAction({
             actionType: AppConstants.SAVE_VIDEO,
-            video:video
+            video: video
+        });
+    },
+    receiveVideos: function(videos){
+        AppDispatcher.handleViewAction({
+            actionType: AppConstants.RECEIVE_VIDEO,
+            videos: videos
+        });
+    },
+    deleteVideo: function(videoId){
+        AppDispatcher.handleViewAction({
+            actionType: AppConstants.DELETE_VIDEO,
+            videoId: videoId
         });
     }
-};
+}
 
 module.exports = AppActions;

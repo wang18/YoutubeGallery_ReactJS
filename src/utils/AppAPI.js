@@ -16,5 +16,32 @@ module.exports = {
     saveVideo: function(video){
         var ref = Firebase.database().ref('videos');
         ref.push(video);
+    },
+    getVideo: function(){
+        var ref = Firebase.database().ref('videos');
+        ref.on('value',function (snapshot) {
+            var videos =[];
+            snapshot.forEach(function (childSnapshot) {
+                console.log(childSnapshot.val());
+                var video ={
+                    id: childSnapshot.key,
+                    title: childSnapshot.val().title,
+                    video_id: childSnapshot.val().video_id,
+                    description: childSnapshot.val().description
+                };
+                videos.push(video);
+                AppActions.receiveVideos(videos);
+            })
+        })
+    },
+    deleteVideo: function (videoId) {
+        var ref = Firebase.database().ref('videos');
+        ref.on('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                if(childSnapshot.val().video_id ==videoId){
+                    ref.child(childSnapshot.key).remove();
+                }
+            });
+        });
     }
 };
