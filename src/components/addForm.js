@@ -1,5 +1,6 @@
-import React from 'react';
+var React = require('react');
 var ReactCreateClass = require('create-react-class');
+var AppActions = require('../actions/AppActions');
 
 var Addform =  ReactCreateClass({
   render: function () {
@@ -33,8 +34,9 @@ var Addform =  ReactCreateClass({
         video_id:this.refs.video_id.value.trim(),
         description: this.refs.description.value.trim()
       };
+      AppActions.saveVideo(video);
 
   }
 });
 
-export default Addform;
+module.exports = Addform;
